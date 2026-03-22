@@ -6,9 +6,6 @@
 
 OpenTofu **example** module that creates a Shared VPC host project network with configurable firewall rules, including CIS benchmark and Identity-Aware Proxy (IAP) rules. Regional subnetworks are provisioned with secondary IP ranges, VPC flow logging, and optional Cloud NAT for outbound internet access. Cloud DNS managed zones are supported for both public (with DNSSEC) and private visibility configurations.
 
-> [!NOTE]
-> We do not recommend consuming this module like you might a [public module](https://search.opentofu.org). It is a baseline, something you can fork, potentially maintain, and modify to fit your organization's needs. Using public modules vs. writing your own has various [drivers and trade-offs](https://docs.osinfra.io/fundamentals/architecture-decision-records/adr-0003) that your organization should evaluate.
-
 ## 🔩 Usage
 
 > [!TIP]
