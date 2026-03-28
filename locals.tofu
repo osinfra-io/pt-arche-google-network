@@ -62,10 +62,10 @@ locals {
     for name, rule in merge(
       { for rule in var.rules : rule.name => rule },
       { for rule in local.rules : rule.name => rule }
-    ) : name => merge(rule, {
-      destination_ranges = rule.direction == "EGRESS" ? rule.ranges : null
-      log_config         = rule.log_config_enabled ? [rule.log_config_metadata] : []
-      source_ranges      = rule.direction == "INGRESS" ? rule.ranges : null
+      ) : name => merge(rule, {
+        destination_ranges = rule.direction == "EGRESS" ? rule.ranges : null
+        log_config         = rule.log_config_enabled ? [rule.log_config_metadata] : []
+        source_ranges      = rule.direction == "INGRESS" ? rule.ranges : null
     })
   }
 
