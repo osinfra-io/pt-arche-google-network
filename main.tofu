@@ -2,7 +2,7 @@
 # https://search.opentofu.org/provider/hashicorp/google/latest/docs/resources/compute_firewall
 
 resource "google_compute_firewall" "rules" {
-  for_each = merge({ for rule in var.rules : rule.name => rule }, { for rule in local.rules : rule.name => rule })
+  for_each = local.rules_map
 
   description        = each.value.description
   destination_ranges = each.value.direction == "EGRESS" ? each.value.ranges : null

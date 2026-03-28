@@ -58,5 +58,7 @@ locals {
     }
   ]
 
+  rules_map = merge({ for rule in var.rules : rule.name => rule }, { for rule in local.rules : rule.name => rule })
+
   shared_vpc_service_projects_map = var.shared_vpc ? { for i in var.shared_vpc_service_projects : i => true } : {}
 }
