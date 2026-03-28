@@ -9,16 +9,6 @@ terraform {
   }
 }
 
-module "public_test" {
-  source = "../../../../dns"
-
-  dns_name   = "mock-subdomain.mock-domain.io."
-  labels     = local.labels
-  name       = "mock-subdomain-mock-domain"
-  project    = var.project
-  visibility = "public"
-}
-
 module "private_test" {
   source = "../../../../dns"
 
@@ -28,4 +18,14 @@ module "private_test" {
   private_visibility_config_networks = ["https://www.googleapis.com/compute/v1/projects/${var.project}/global/networks/mock-vpc"]
   project                            = var.project
   visibility                         = "private"
+}
+
+module "public_test" {
+  source = "../../../../dns"
+
+  dns_name   = "mock-subdomain.mock-domain.io."
+  labels     = local.labels
+  name       = "mock-subdomain-mock-domain"
+  project    = var.project
+  visibility = "public"
 }
