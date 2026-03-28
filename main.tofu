@@ -5,13 +5,13 @@ resource "google_compute_firewall" "rules" {
   for_each = local.rules_map
 
   description        = each.value.description
-  destination_ranges = each.value.direction == "EGRESS" ? each.value.ranges : null
+  destination_ranges = each.value.destination_ranges
   direction          = each.value.direction
   name               = "${var.name}-${each.value.name}"
   network            = google_compute_network.this.name
   priority           = each.value.priority
   project            = var.project
-  source_ranges      = each.value.direction == "INGRESS" ? each.value.ranges : null
+  source_ranges      = each.value.source_ranges
   source_tags        = each.value.source_tags
   target_tags        = each.value.target_tags
 
@@ -32,7 +32,7 @@ resource "google_compute_firewall" "rules" {
   }
 
   dynamic "log_config" {
-    for_each = each.value.log_config_enabled ? [each.value.log_config_metadata] : []
+    for_each = each.value.log_config
     content {
       metadata = log_config.value
     }

@@ -48,9 +48,9 @@ locals {
       deny                = []
       description         = "Allow SSH ingress from IAP"
       direction           = "INGRESS"
-      name                = "allow-ssh-ingress-from-iap"
       log_config_enabled  = true
       log_config_metadata = "INCLUDE_ALL_METADATA"
+      name                = "allow-ssh-ingress-from-iap"
       priority            = null
       ranges              = ["35.235.240.0/20"]
       source_tags         = null
@@ -58,7 +58,16 @@ locals {
     }
   ]
 
-  rules_map = merge({ for rule in var.rules : rule.name => rule }, { for rule in local.rules : rule.name => rule })
+  rules_map = {
+    for name, rule in merge(
+      { for rule in var.rules : rule.name => rule },
+      { for rule in local.rules : rule.name => rule }
+    ) : name => merge(rule, {
+      destination_ranges = rule.direction == "EGRESS" ? rule.ranges : null
+      log_config         = rule.log_config_enabled ? [rule.log_config_metadata] : []
+      source_ranges      = rule.direction == "INGRESS" ? rule.ranges : null
+    })
+  }
 
   shared_vpc_service_projects_map = var.shared_vpc ? { for i in var.shared_vpc_service_projects : i => true } : {}
 }
