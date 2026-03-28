@@ -9,12 +9,18 @@ terraform {
   }
 }
 
+# Google Network
+# https://github.com/osinfra-io/pt-arche-google-network
+
 module "all_subnets_test" {
   source = "../../../../regional/nat"
 
   network = "mock-vpc"
   project = var.project
 }
+
+# Google Network
+# https://github.com/osinfra-io/pt-arche-google-network
 
 module "list_of_subnets_test" {
   source = "../../../../regional/nat"

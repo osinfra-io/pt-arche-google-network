@@ -9,6 +9,9 @@ terraform {
   }
 }
 
+# Google Network
+# https://github.com/osinfra-io/pt-arche-google-network
+
 module "public_test" {
   source = "../../../../dns"
 
@@ -18,6 +21,9 @@ module "public_test" {
   project    = var.project
   visibility = "public"
 }
+
+# Google Network
+# https://github.com/osinfra-io/pt-arche-google-network
 
 module "private_test" {
   source = "../../../../dns"
