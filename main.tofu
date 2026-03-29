@@ -18,16 +18,16 @@ resource "google_compute_firewall" "rules" {
   dynamic "allow" {
     for_each = each.value.allow
     content {
-      protocol = allow.value["protocol"]
       ports    = allow.value["ports"]
+      protocol = allow.value["protocol"]
     }
   }
 
   dynamic "deny" {
     for_each = each.value.deny
     content {
-      protocol = deny.value["protocol"]
       ports    = deny.value["ports"]
+      protocol = deny.value["protocol"]
     }
   }
 

@@ -7,9 +7,9 @@ variable "network" {
 }
 
 variable "prefix" {
+  default     = ""
   description = "The prefix for the resource name.  Defaults to var.network"
   type        = string
-  default     = ""
 }
 
 variable "project" {
@@ -18,9 +18,9 @@ variable "project" {
 }
 
 variable "source_subnetwork_ip_ranges_to_nat" {
+  default     = "ALL_SUBNETWORKS_ALL_IP_RANGES"
   description = "How NAT should be configured per Subnetwork.  Possible values are ALL_SUBNETWORKS_ALL_IP_RANGES, ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES, and LIST_OF_SUBNETWORKS"
   type        = string
-  default     = "ALL_SUBNETWORKS_ALL_IP_RANGES"
 
   validation {
     condition     = contains(["ALL_SUBNETWORKS_ALL_IP_RANGES", "ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES", "LIST_OF_SUBNETWORKS"], var.source_subnetwork_ip_ranges_to_nat)
@@ -29,7 +29,7 @@ variable "source_subnetwork_ip_ranges_to_nat" {
 }
 
 variable "subnetwork_names" {
+  default     = []
   description = "Subnet names for NAT configuration.  Only used if source_subnetwork_ip_ranges_to_nat is set to LIST_OF_SUBNETWORKS"
   type        = list(string)
-  default     = []
 }

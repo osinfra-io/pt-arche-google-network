@@ -2,9 +2,9 @@
 # https://opentofu.org/docs/language/values/variables
 
 variable "description" {
+  default     = null
   description = "A textual description field. Defaults to 'DNS zone for <dns_name>'"
   type        = string
-  default     = null
 }
 
 variable "dns_name" {
@@ -13,9 +13,9 @@ variable "dns_name" {
 }
 
 variable "labels" {
+  default     = {}
   description = "A map of key/value pairs to assign to the resources being created"
   type        = map(string)
-  default     = {}
 }
 
 variable "name" {
@@ -24,9 +24,9 @@ variable "name" {
 }
 
 variable "private_visibility_config_networks" {
+  default     = []
   description = "For privately visible zones, the set of Virtual Private Cloud network resources that the zone is visible from"
   type        = list(string)
-  default     = []
 }
 
 variable "project" {
