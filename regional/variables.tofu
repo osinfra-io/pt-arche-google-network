@@ -17,9 +17,9 @@ variable "network" {
 }
 
 variable "private_ip_google_access" {
+  default     = null
   description = "When enabled, VMs in this subnetwork without external IP addresses can access Google APIs and services by using Private Google Access"
   type        = bool
-  default     = null
 }
 
 variable "project" {
@@ -28,9 +28,9 @@ variable "project" {
 }
 
 variable "purpose" {
+  default     = null
   description = "The purpose of the resource. This field can be either `PRIVATE_RFC_1918`, `INTERNAL_HTTPS_LOAD_BALANCER` or `REGIONAL_MANAGED_PROXY`"
   type        = string
-  default     = null
 
   validation {
     condition     = var.purpose == null || contains(["PRIVATE_RFC_1918", "INTERNAL_HTTPS_LOAD_BALANCER", "REGIONAL_MANAGED_PROXY"], var.purpose)
@@ -39,9 +39,9 @@ variable "purpose" {
 }
 
 variable "role" {
+  default     = null
   description = "The role of subnetwork. The value can be set to `ACTIVE` or `BACKUP`"
   type        = string
-  default     = null
 
   validation {
     condition     = var.role == null || contains(["ACTIVE", "BACKUP"], var.role)
@@ -50,10 +50,10 @@ variable "role" {
 }
 
 variable "secondary_ip_ranges" {
+  default     = []
   description = "An array of configurations for secondary IP ranges for VM instances contained in this subnetwork"
   type = list(object({
     ip_cidr_range = string
     range_name    = string
   }))
-  default = []
 }
