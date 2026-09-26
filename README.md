@@ -4,9 +4,20 @@
 
 ## Repository Description
 
-OpenTofu **example** module that creates a Shared VPC host project network with configurable firewall rules, including CIS benchmark and Identity-Aware Proxy (IAP) rules. Regional subnetworks are provisioned with secondary IP ranges, VPC flow logging, and optional Cloud NAT for outbound internet access. Cloud DNS managed zones are supported for both public (with DNSSEC) and private visibility configurations.
+Reusable OpenTofu child module that creates a Shared VPC host project network with configurable firewall rules, including CIS benchmark and Identity-Aware Proxy (IAP) rules. Regional subnetworks are provisioned with secondary IP ranges, VPC flow logging, and optional Cloud NAT for outbound internet access. Cloud DNS managed zones are supported for both public (with DNSSEC) and private visibility configurations.
 
 ## 🔩 Usage
+
+### Module interfaces
+
+| Source path | Purpose | Interface |
+| --- | --- | --- |
+| Repository root | Creates a custom-mode VPC, firewall rules, and optional Shared VPC host/service-project attachments. | [`variables.tofu`](variables.tofu) · [`outputs.tofu`](outputs.tofu) |
+| `//dns` | Creates a public or private Cloud DNS managed zone. | [`dns/variables.tofu`](dns/variables.tofu) · [`dns/outputs.tofu`](dns/outputs.tofu) |
+| `//regional` | Creates a regional subnetwork with optional secondary ranges, Private Google Access, purpose, and role. | [`regional/variables.tofu`](regional/variables.tofu) · [`regional/outputs.tofu`](regional/outputs.tofu) |
+| `//regional/nat` | Creates a Cloud Router and Cloud NAT for all or selected subnetworks. | [`regional/nat/variables.tofu`](regional/nat/variables.tofu) · [`regional/nat/outputs.tofu`](regional/nat/outputs.tofu) |
+
+The root module defaults to a non-shared `osinfra-vpc` network with no firewall rules. Firewall logging defaults to enabled with all metadata. Public DNS zones enable DNSSEC; private zones are associated only with the networks supplied by the consumer. Cloud NAT defaults to all primary and secondary IP ranges in all subnetworks. Firewall, DNS visibility, Shared VPC attachment, and NAT choices affect network exposure and egress paths; Cloud DNS queries, NAT gateways/traffic, and flow or firewall logs can incur GCP charges.
 
 > [!TIP]
 > You can check the [tests/fixtures](tests/fixtures) directory for example configurations. These fixtures set up the system for testing by providing all the necessary initial code, thus creating good examples on which to base your configurations.
