@@ -20,7 +20,7 @@ Reusable OpenTofu child module that creates a Shared VPC host project network wi
 The root module defaults to a non-shared `osinfra-vpc` network with built-in Google Cloud probe and IAP SSH firewall rules; custom firewall rules default to none. Firewall logging defaults to enabled with all metadata. Public DNS zones enable DNSSEC; private zones are associated only with the networks supplied by the consumer. Cloud NAT defaults to all primary and secondary IP ranges in all subnetworks. Firewall, DNS visibility, Shared VPC attachment, and NAT choices affect network exposure and egress paths; Cloud DNS queries, NAT gateways/traffic, and flow or firewall logs can incur GCP charges.
 
 > [!TIP]
-> See [tests/fixtures](tests/fixtures) for example configurations.
+> You can check the [tests/fixtures](tests/fixtures) directory for example configurations. These fixtures set up the system for testing by providing all the necessary initial code, thus creating good examples on which to base your configurations.
 
 Google project services must be enabled before using this module. As a best practice, these should be defined in the [pt-arche-google-project](https://github.com/osinfra-io/pt-arche-google-project) module. The following services are required:
 
