@@ -20,7 +20,7 @@ Reusable OpenTofu child module that creates a Shared VPC host project network wi
 The root module defaults to a non-shared `osinfra-vpc` network with built-in Google Cloud probe and IAP SSH firewall rules; custom firewall rules default to none. Firewall logging defaults to enabled with all metadata. Public DNS zones enable DNSSEC; private zones are associated only with the networks supplied by the consumer. Cloud NAT defaults to all primary and secondary IP ranges in all subnetworks. Firewall, DNS visibility, Shared VPC attachment, and NAT choices affect network exposure and egress paths; Cloud DNS queries, NAT gateways/traffic, and flow or firewall logs can incur GCP charges.
 
 > [!TIP]
-> You can check the [tests/fixtures](tests/fixtures) directory for example configurations. These fixtures set up the system for testing by providing all the necessary initial code, thus creating good examples on which to base your configurations.
+> See [tests/fixtures](tests/fixtures) for example configurations.
 
 Google project services must be enabled before using this module. As a best practice, these should be defined in the [pt-arche-google-project](https://github.com/osinfra-io/pt-arche-google-project) module. The following services are required:
 
@@ -34,8 +34,6 @@ Google project services must be enabled before using this module. As a best prac
 
 ## 📋 Skills and Knowledge
 
-Links to documentation and other resources required to develop and iterate in this repository successfully.
-
 - [cloud dns](https://cloud.google.com/dns/docs)
 - [cloud nat](https://cloud.google.com/nat/docs/overview)
 - [firewall](https://cloud.google.com/vpc/docs/firewalls)
@@ -45,7 +43,7 @@ Links to documentation and other resources required to develop and iterate in th
 
 ## 🔍 Tests
 
-All tests are [mocked](https://opentofu.org/docs/cli/commands/test/#the-mock_provider-blocks) allowing us to test the module without creating infrastructure or requiring credentials. The trade-offs are acceptable in favor of speed and simplicity. In an OpenTofu test, a mocked provider or resource will generate fake data for all computed attributes that would normally be provided by the underlying provider APIs.
+Tests use [mocked providers](https://opentofu.org/docs/cli/commands/test/#the-mock_provider-blocks); no infrastructure or credentials are required.
 
 ```none
 tofu init
