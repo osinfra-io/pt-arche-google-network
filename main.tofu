@@ -7,7 +7,7 @@ resource "google_compute_firewall" "rules" {
   description        = each.value.description
   destination_ranges = each.value.destination_ranges
   direction          = each.value.direction
-  name               = "${var.name}-${each.value.name}"
+  name               = each.value.firewall_name
   network            = google_compute_network.this.name
   priority           = each.value.priority
   project            = var.project

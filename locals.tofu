@@ -64,6 +64,7 @@ locals {
       { for rule in local.rules : rule.name => rule }
       ) : name => merge(rule, {
         destination_ranges = rule.direction == "EGRESS" ? rule.ranges : null
+        firewall_name      = "${var.name}-${rule.name}"
         log_config         = rule.log_config_enabled ? [rule.log_config_metadata] : []
         source_ranges      = rule.direction == "INGRESS" ? rule.ranges : null
     })
