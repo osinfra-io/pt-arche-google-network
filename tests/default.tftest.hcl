@@ -46,6 +46,5 @@ run "regional_nat" {
 }
 
 variables {
-  project     = "mock-project"
-  environment = "mock-environment"
+  project = "mock-project"
 }
